@@ -1,0 +1,63 @@
+[logging]
+identifier = Focal_LSTM
+
+[train] #train parameters
+epoch = 1
+batch_size = 1024
+reader_num = 0
+
+
+[eval] #eval parameters
+batch_size = 128
+reader_num = 0
+
+[data] #data parameters
+
+train_data_path = /home/dkb/workspace/Code/nlp_data/jieba/valid.json
+valid_data_path = /home/dkb/workspace/Code/nlp_data/jieba/test.json
+
+train_formatter_type = LSTMFormatter
+valid_formatter_type = LSTMFormatter
+test_formatter_type = LSTMFormatter
+
+max_seq_length = 300
+
+[model] #model parameters
+model_name = TextLSTM_Focal
+
+src_vocab_path = /home/dkb/workspace/Code/nlp_data/jieba/src_dic
+trg_vocab_path = /home/dkb/workspace/Code/nlp_data/jieba/trg_label.dic
+eval_vocab_path = /home/dkb/workspace/Code/nlp_data/jieba/trg_label.dic
+
+
+emb_size = 100
+hidden_size = 256
+num_classes = 72
+use_gru = True
+num_layers = 1
+model_dropout = 0.2
+
+dropout = 0.5
+
+[output] #output parameters
+
+eval_output = Test_eval
+output_time = 10
+threshold = 0.5
+model_name = TextLSTM_Focal
+top-k = 3
+
+[optim] #optimizer and lr_scheduler parameters
+optimizer = adam
+learning_rate =  0.0006
+weight_decay = 0
+
+lr_scheduler = Step
+step_size = 1
+lr_multiplier = 1
+update_scheduler = step
+
+
+[report] #report parameters
+report_fun = report_Basic_F1
+metric = macro_f1

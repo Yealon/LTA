@@ -1,0 +1,59 @@
+[logging]
+identifier = Focal_CNN
+
+[train] #train parameters
+epoch = 10
+batch_size = 1024
+
+reader_num = 1
+
+
+[eval] #eval parameters
+batch_size = 128
+reader_num = 1
+
+[data] #data parameters
+
+train_formatter_type = CNNFormatter
+valid_formatter_type = CNNFormatter
+test_formatter_type = CNNFormatter
+
+max_seq_length = 300
+
+[model] #model parameters
+model_name = TextCNN_Focal
+
+src_vocab_path = /home/dkb/workspace/Code/nlp_data/jieba/src_dic
+trg_vocab_path = /home/dkb/workspace/Code/nlp_data/jieba/trg_label.dic
+eval_vocab_path = /home/dkb/workspace/Code/nlp_data/jieba/trg_label.dic
+
+
+emb_size = 100
+num_filters = 128
+filter_sizes = 6,7,8
+
+num_classes = 72
+
+dropout = 0.5
+
+[output] #output parameters
+
+output_time = 200
+threshold = 0.3
+model_name = TextCNN_Focal
+top-k = 3
+
+[optim] #optimizer and lr_scheduler parameters
+optimizer = adam
+learning_rate =  0.0006
+weight_decay = 0
+
+lr_scheduler = Step
+step_size = 1
+lr_multiplier = 1
+update_scheduler = step
+
+
+[report] #report parameters
+report_fun = report_Basic_F1
+metric = macro_f1

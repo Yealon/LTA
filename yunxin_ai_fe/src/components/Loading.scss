@@ -1,0 +1,61 @@
+@import "../sass/mixins";
+@import "../sass/variables";
+
+#loading-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: $loadingZIndex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include hardware-acceleration;
+}
+
+.loading-enter-active,
+.loading-leave-active {
+  transition: opacity .2s ease;
+}
+
+.loading-enter,
+.loading-leave-active {
+  opacity: 0
+}
+
+.loading-toast {
+  width: 100px;
+  height: 100px;
+  background-color: rgba(#000, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+@keyframes loading-rotate {
+  0% {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+
+  100% {
+    transform: rotate3d(0, 0, 1, 360deg);
+  }
+}
+
+.loading-toast-icon {
+  width: 40px;
+  height: 40px;
+  animation: loading-rotate 1s steps(12, end) infinite;
+  background: url('../assets/loading.png') no-repeat;
+  background-size: 100%;
+}
+
+.loading-toast-content {
+  color: #ffffff;
+  font-size: 14px;
+  margin-top: 10px;
+}

@@ -1,0 +1,20 @@
+单卡训练：命令行参数样例：
+接着checkpoints训练：--config config/TextCNN/Test.config --checkpoint /home/dkb/workspace/Code/Code/logs_train/TextCNN_testworker/2020_12_22__00_07_16/best_checkpoint_ep1.pth  --gpu 1 --do_test
+重新训练：config config/TextCNN/Test.config  --gpu 2 --do_test
+
+多卡分布式训练：终端命令样例：
+CUDA_VISIBLE_DEVICES=1,2 python -m torch.distributed.launch --nproc_per_node=2 --master_port 29501 train.py --config config/TextCNN/Test.config --do_test --distributed
+
+测试：命令行参数样例： --checkpoint /home/dkb/workspace/Code/Code/Train_checkpoint/Transformer/2.pkl --config config/Transformer/Test.config  --gpu 1
+
+预测 predict文件，命令行参数样例：
+--config config/TextCNN/Test.config  --gpu 1 --checkpoint /home/dkb/workspace/Code/Code/Train_checkpoint/TextCNN/10.pkl
+
+每个test.config文件是测试用的，其中Train.config训练用，使用train.json数据集（在default.config文件中有指定，是框架最先搜索的配置，之后才根据Test等cofnig对default进行进一步配置）
+
+Train对应训练文件，test对应测试文件，根据已有的checkpoint对test.json测试。predict对应终端交互，使用已有的checkpoint预测终端输入的描述对应案由。
+
+make.py对应一些数据清洗方法，例如对label描述的清洗等
+analyze.py对应一些对实验结果的分析。
+以上两个文件是分一段一段写的，每段有自己的注释，并在一段运行完之后注释掉已有内容。
+每段开头用‘’‘注释写明代码功能，执行结束后使用多行注释#注释掉，继续写下一部分内容。
